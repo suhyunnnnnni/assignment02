@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'dex',
       component: () => import('../views/PokedexView.vue'),
     },
+    {
+      path: '/sign',
+      name: 'sign',
+      component: () => import('../views/SignInView.vue'),
+    },
   ],
 })
 

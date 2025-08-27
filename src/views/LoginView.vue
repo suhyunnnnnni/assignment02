@@ -3,7 +3,7 @@
         <div class="d-flex flex-column  align-items-center mt-20 pt-20 w-100 h-100">
             <!-- title -->
             <div>
-                <p class="fs-6x fw-bold text-white mt-10">SleepMon</p>
+                <p class="title fs-6x fw-bold text-white mt-10">SleepMon</p>
             </div>
 
             <!-- id&password -->
@@ -15,7 +15,9 @@
                         <span class="path1"></span>
                         <span class="path2"></span>
                     </i>
-                    <input type="text" placeholder="아이디" class="form-control bg-transparent border border-transparent text-white">
+                    <input type="text" placeholder="아이디" 
+                            class="form-control bg-transparent border border-transparent text-white fs-2" 
+                            v-model="idInput">
 
                 </div>
 
@@ -29,7 +31,8 @@
                         <span class="path3"></span>
                     </i>
                     <input type="password" placeholder="비밀번호"
-                        class="form-control bg-transparent border border-transparent text-white">
+                        class="form-control bg-transparent border border-transparent text-white fs-2"
+                        v-model="pwInput">
 
                 </div>
 
@@ -40,8 +43,8 @@
             </div>
 
             <!-- 회원 가입 -->
-            <div class="d-flex justify-content-center w-100 h-25">
-                <a href class="no-hover fs-2 fw-bold text-white mt-10">회원 가입</a>
+            <div class="d-flex justify-content-center align-items-start mt-10 w-100 h-25">
+                <button class="btn fs-2 fw-bold text-white " @click="goToSignIn()">회원 가입</button>
             </div>
 
         </div>
@@ -56,6 +59,10 @@ const router = useRouter()
 function goToSleep() {
     router.push('/sleep')
 }
+
+function goToSignIn() {
+    router.push('/sign')
+}
 </script>
 
 <style scoped>
@@ -69,13 +76,17 @@ function goToSleep() {
 
 }
 
+.title {
+    text-shadow: 2px 2px 5px rgba(255,255,255,0.5);
+}
+
 #container {
     border-radius: 30px;
     background-color: rgb(60, 82, 155, 0.8)
 }
 
 .btn.btn-primary {
-    background: linear-gradient(450deg, #5d93fe, #6578f7)
+    background: linear-gradient(360deg, #5d93fe, #6578f7)
 }
 
 .h-30{

@@ -1,7 +1,7 @@
 <template>
 
     <div id="background">
-        <div class="d-flex flex-column align-items-center w-100 h-100">
+        <div class="d-flex flex-column align-items-center mt-20 w-100 h-100">
 
             <!-- title -->
             <div>
@@ -16,11 +16,11 @@
                         <span class="path1"></span>
                         <span class="path2"></span>
                     </i>
-                    <span class="fs-1 fw-bold ms-2 text-white">오늘</span>
+                    <span class="fs-1 fw-bold ms-3 text-white">오늘</span>
                 </div>
 
                 <!--  취침 시간 입력 -->
-                <div class="d-flex justify-content-center align-items-center gap-2 w-100 h-25">
+                <div class="d-flex justify-content-center align-items-center gap-2 mb-2 w-100 h-25">
                     <i class="ki-duotone ki-moon text-white fs-3x">
                         <span class="path1"></span>
                         <span class="path2"></span>
@@ -80,7 +80,7 @@ onMounted(() => {
 #background {
     height: 832px;
     width: 468px;
-    background-color: rgb(75, 105, 180);
+    background-image: url('/images/sleep-bg.png');
     border-radius: 30px;
 }
 
@@ -99,6 +99,6 @@ onMounted(() => {
 }
 
 .btn.btn-primary {
-    background: linear-gradient(450deg, #5d93fe, #6578f7)
+    background: linear-gradient(360deg, #5d93fe, #6578f7)
 }
 </style>
