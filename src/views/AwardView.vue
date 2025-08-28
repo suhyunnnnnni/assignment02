@@ -1,11 +1,11 @@
 <template>
 
-    <div id="background">
+    <div class="background" :class=" { rare: selectedMon.id === 3}">
         <div class="d-flex flex-column align-items-center mt-20 w-100 h-100">
             <!-- title -->
             <div class="d-flex flex-column align-items-center">
                 <p class="fs-3x">당신의 수면 타입은</p>
-                <p class="fw-bold fs-4x">{{selectedMon.type}}!</p>
+                <p class="fw-bold fs-4x">{{selectedMon.type}}</p>
             </div>
 
             <!-- 캐릭터 -->
@@ -38,18 +38,19 @@ import { storeToRefs } from 'pinia';
 // monster pinia 불러오기
 import { useMonsterStore } from '@/stores/monster'
 const monsterStore = useMonsterStore()
-const { selectedMon, userId } = storeToRefs(monsterStore)
+const { selectedMon, userId} = storeToRefs(monsterStore)
 
 
 onMounted(() => {
 
     // 캐릭터 랜덤 선택 -> 보상 지급 함수 실행
-    const monsterId = Math.round(Math.random()*10)
+    const monsterId = Math.floor(Math.random()*10) + 1  
     console.log(`${monsterId}`)
     requestReward(monsterId)
 
     // 지급 보상 저장 함수 실행 
     requestRewardAdd(userId.value,monsterId)
+
 })
 
 // 랜덤으로 지정한 캐릭터 아이디로 캐릭터 정보 불러오기
@@ -68,7 +69,7 @@ async function requestReward(monsterId) {
 
     console.log(`응답 -> ${JSON.stringify(response.data)}`)
     selectedMon.value = response.data.data.data[0]
-    
+    // 가디 아르세우스
 
   } catch (err) {
     console.error(`에러 -> ${err}`)
@@ -101,13 +102,21 @@ async function requestRewardAdd(userId, monsterId) {
 function goTodex() {
     router.push('/dex')
 }
+
 </script>
 
 <style scoped>
-#background {
+.background {
     height: 832px;
     width: 468px;
-    background-color: #f6eaa7;
+    background: #f6eaa7;
+    border-radius: 30px;
+}
+
+.rare {
+  height: 832px;
+    width: 468px;
+    background: linear-gradient(360deg, #F57F17, #FFFDE7);
     border-radius: 30px;
 }
 

@@ -13,8 +13,10 @@ export const useMonsterStore = defineStore('monster', () => {
     // 유저 아이디 저장
     const userId = ref('')
 
+    const now = ref('')
+
     return {
-        monsters, selectedMon, userId
+        monsters, selectedMon, userId, now
     }
 
 })
