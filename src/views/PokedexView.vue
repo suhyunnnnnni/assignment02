@@ -73,6 +73,9 @@ const TOTAL_MONSTERS = 10;
 // 물음표 이미지 경로
 const questionMark = '/public/images/questionmark-1.png'
 
+// url
+import { requestConfig } from '../../app.config'
+
 
 
 function requestMonsterListWrapper(page, perPage) {
@@ -87,7 +90,7 @@ async function requestMonsterList(userId, page, perPage) {
     try {
         const response = await axios({
             method: 'post',
-            baseURL: "http://localhost:8001",
+            baseURL: requestConfig.baseUrl,
             url: '/monster/v1/list',
             data: {
                 user_id: userId,

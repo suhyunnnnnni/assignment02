@@ -88,7 +88,7 @@
 import { useRouter } from 'vue-router';
 const router = useRouter()
 
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 const idInput = ref('')
 const pwInput = ref('')
 
@@ -103,6 +103,10 @@ const { userId } = storeToRefs(monsterStore)
 const status = ref('')
 const contents = ref('')
 const showAlert = ref(false);
+
+
+// url
+import { requestConfig } from '../../app.config'
 
 
 const output = ref('')
@@ -149,7 +153,7 @@ async function requestCheck(user) {
     try {
         const response = await axios({
             method: 'post',
-            baseURL: "http://localhost:8001/",
+            baseURL: requestConfig.baseUrl,
             url: '/user/v1/read',
             data: user,
             timeout: 5000,

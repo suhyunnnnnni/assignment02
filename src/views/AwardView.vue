@@ -40,6 +40,8 @@ import { useMonsterStore } from '@/stores/monster'
 const monsterStore = useMonsterStore()
 const { selectedMon, userId} = storeToRefs(monsterStore)
 
+// url
+import { requestConfig } from '../../app.config'
 
 onMounted(() => {
 
@@ -58,7 +60,7 @@ async function requestReward(monsterId) {
   try {
     const response = await axios({
       method: 'post',
-      baseURL: "http://localhost:8001",
+      baseURL: requestConfig.baseUrl,
       url: '/monster/v1/read',
       data: {
         id: monsterId
@@ -82,7 +84,7 @@ async function requestRewardAdd(userId, monsterId) {
 
     const response = await axios({
       method: 'post',
-      baseURL: "http://localhost:8001",
+      baseURL: requestConfig.baseUrl,
       url: '/monster/v1/add',
       data: {
         userId: userId,

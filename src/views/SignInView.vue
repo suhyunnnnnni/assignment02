@@ -116,7 +116,7 @@ const router = useRouter()
 
 import axios from 'axios'
 
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const pwInput = ref('')
 const idInput = ref('')
@@ -128,6 +128,9 @@ const showAlert = ref(false);
 
 // modal
 let modalInstance = null
+
+// url
+import { requestConfig } from '../../app.config'
 
 
 
@@ -184,7 +187,7 @@ async function requestUserAdd(user) {
     try {
         const response = await axios({
             method: 'post',
-            baseURL: "http://localhost:8001/",
+            baseURL: requestConfig.baseUrl,
             url: '/user/v1/add',
             data: user,
             timeout: 5000,
