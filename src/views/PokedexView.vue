@@ -50,7 +50,8 @@ import { storeToRefs } from 'pinia';
 // monster pinia 불러오기
 import { useMonsterStore } from '@/stores/monster'
 const monsterStore = useMonsterStore()
-const { monsters } = storeToRefs(monsterStore)
+const { monsters, userId } = storeToRefs(monsterStore)
+
 
 const monsterRows = ref([])
 
@@ -63,15 +64,14 @@ const pagination1 = ref({})
 // 도감 진행도
 const progress = ref()
 
-// userId
-const userId = 1
+
 
 function requestMonsterListWrapper(page, perPage) {
-    return requestMonsterList(userId, page, perPage)
+    return requestMonsterList(userId.value, page, perPage)
 }
 
 onMounted(() => {
-    requestMonsterList(userId, 1, 6)
+    requestMonsterList(userId.value, 1, 6)
 })
 
 async function requestMonsterList(userId, page, perPage) {

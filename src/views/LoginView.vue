@@ -77,33 +77,7 @@
             </div>
             <!--end::Alert-->
 
-            <!-- modal -->
-            <div class="modal fade" tabindex="-1" id="kt_modal_1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">성공!</h3>
-
-                            <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
-                                        class="path2"></span></i>
-                            </div>
-                            <!--end::Close-->
-                        </div>
-
-                        <div class="modal-body">
-                            <p>성공적으로 회원가입이 이루어졌습니다.</p>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                @click="goToLogin()">로그인하러 가기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
         </div>
 
@@ -118,17 +92,22 @@ import { ref, onMounted } from 'vue'
 const idInput = ref('')
 const pwInput = ref('')
 
+// pinia
+import { storeToRefs } from 'pinia';
+import { useMonsterStore } from '@/stores/monster'
+const monsterStore = useMonsterStore()
+const { userId } = storeToRefs(monsterStore)
+
+
 // alert
 const status = ref('')
 const contents = ref('')
 const showAlert = ref(false);
 
-// modal
-let modalInstance = null
 
 const output = ref('')
 
-function goToSleep() {
+async function goToSleep() {
 
     if (idInput.value && pwInput.value) {
 
@@ -142,9 +121,10 @@ function goToSleep() {
 
         }
 
-        requestCheck(user)
+        await requestCheck(user)
+
         if (output.value == '200') {
-            modalInstance.show()
+            router.push('/sleep')
         } else {
             status.value = '알림'
             contents.value = '아이디와 비밀번호가 일치하지 않습니다. '
@@ -170,7 +150,7 @@ async function requestCheck(user) {
         const response = await axios({
             method: 'post',
             baseURL: "http://localhost:8001/",
-            url: '/user/v1/add',
+            url: '/user/v1/read',
             data: user,
             timeout: 5000,
             responseType: 'json'
@@ -178,12 +158,16 @@ async function requestCheck(user) {
 
         console.log(`응답 -> ${JSON.stringify(response.data)}`)
 
+        userId.value  = response.data.data.data[0].id
+        
         output.value = response.data.code
 
     } catch (err) {
         console.error(`에러 -> ${err}`)
     }
 }
+
+
 
 
 function goToSignIn() {

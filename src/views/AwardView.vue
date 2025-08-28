@@ -38,7 +38,7 @@ import { storeToRefs } from 'pinia';
 // monster pinia 불러오기
 import { useMonsterStore } from '@/stores/monster'
 const monsterStore = useMonsterStore()
-const { selectedMon } = storeToRefs(monsterStore)
+const { selectedMon, userId } = storeToRefs(monsterStore)
 
 
 onMounted(() => {
@@ -49,8 +49,7 @@ onMounted(() => {
     requestReward(monsterId)
 
     // 지급 보상 저장 함수 실행 
-    const userId = 1;
-    requestRewardAdd(userId,monsterId)
+    requestRewardAdd(userId.value,monsterId)
 })
 
 // 랜덤으로 지정한 캐릭터 아이디로 캐릭터 정보 불러오기

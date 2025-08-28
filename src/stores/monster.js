@@ -10,8 +10,11 @@ export const useMonsterStore = defineStore('monster', () => {
     // 보상 캐릭터의 정보 넣을 공간
     const selectedMon = ref({})
 
+    // 유저 아이디 저장
+    const userId = ref('')
+
     return {
-        monsters, selectedMon
+        monsters, selectedMon, userId
     }
 
 })

@@ -132,14 +132,17 @@ let modalInstance = null
 
 
 onMounted(() => {
+
+    // modal
     const modalEl = document.getElementById('kt_modal_1')
     modalInstance = new bootstrap.Modal(modalEl)
+
 })
 
 const output = ref('');
 
 // 회원가입 절차
-function goToSignIn() {
+async function goToSignIn() {
 
     if (idInput.value && pwInput.value) {
 
@@ -154,7 +157,7 @@ function goToSignIn() {
         }
 
         // 사용자 추가
-        requestUserAdd(user);
+        await requestUserAdd(user);
         if(output.value == '200') {
             modalInstance.show()
         } else {
