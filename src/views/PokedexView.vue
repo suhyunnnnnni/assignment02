@@ -16,8 +16,9 @@
                         <div class="card-body d-flex justify-content-center h-75">
                             <img :src="mon.img_path" />
                         </div>
-                        <div class="card-footer d-flex justify-content-center align-items-center fs-2 fw-bold h-25">
-                            {{ mon.name }}
+                        <div class="card-footer d-flex justify-content-center align-items-center fs-2 h-25">
+                            <span class="fw-bold me-2">{{ mon.id }}번</span>
+                            <span class="fw-bold">{{ mon.name }}</span>
                         </div>
                     </div>
                 </div>
@@ -64,6 +65,12 @@ const pagination1 = ref({})
 // 도감 진행도
 const progress = ref()
 
+// 전체 캐릭터 수 
+const TOTAL_MONSTERS = 10;
+
+// 물음표 이미지 경로
+const questionMark = '/public/images/questionmark-1.png'
+
 
 
 function requestMonsterListWrapper(page, perPage) {
@@ -91,18 +98,18 @@ async function requestMonsterList(userId, page, perPage) {
 
         console.log(`응답 -> ${JSON.stringify(response.data)}`)
 
+        
         monsters.value = response.data.data.data
-
+        progress.value = response.data.total
+        
         progress.value = response.data.data.header.total
-
-        console.log(progress.value)
 
         // 2차원 배열로 변환
         monsterRows.value = []
         for (let i = 0; i < monsters.value.length; i += 2) {
             monsterRows.value.push(monsters.value.slice(i, i + 2));
         }
-
+        
         pagination1.value = makePagination(response.data.data.header)
 
     } catch (err) {
@@ -126,6 +133,10 @@ function goToLogin() {
 
 img {
     height: 100%;
+}
+
+.card {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .w-40 {

@@ -10,7 +10,7 @@
 
             <!-- 캐릭터 -->
             <div class="mt-20 glow">
-                <img :src=selectedMon.img_path></img>
+                <img :src=selectedMon.img_path class="animate__animated animate__pulse animate__infinite"></img>
             </div>
 
             <!-- 도감 보기 -->
